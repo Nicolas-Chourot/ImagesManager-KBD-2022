@@ -169,8 +169,20 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="ImagesData\160c7f08-1c6f-4043-beae-73e5eaa02448.Jpeg" />
+    <Content Include="ImagesData\210f3efb-aa82-4232-aa58-600962b0c0f3.Jpeg" />
+    <Content Include="ImagesData\22ee5bbe-f803-4d10-86d8-23e32a3d82ef.Jpeg" />
+    <Content Include="ImagesData\3672dd8d-0917-474f-bac6-39ebd9255e1b.Jpeg" />
+    <Content Include="ImagesData\8f9a24c1-0701-47c5-a4c7-30ea363f62b7.Jpeg" />
+    <Content Include="ImagesData\c2219db3-1bf4-46ff-8b9e-c29b9c4b691e.Jpeg" />
     <Content Include="ImagesData\Loading_icon.gif" />
     <Content Include="ImagesData\No_image.png" />
+    <Content Include="ImagesData\Thumbnails\160c7f08-1c6f-4043-beae-73e5eaa02448.Jpeg" />
+    <Content Include="ImagesData\Thumbnails\210f3efb-aa82-4232-aa58-600962b0c0f3.Jpeg" />
+    <Content Include="ImagesData\Thumbnails\22ee5bbe-f803-4d10-86d8-23e32a3d82ef.Jpeg" />
+    <Content Include="ImagesData\Thumbnails\3672dd8d-0917-474f-bac6-39ebd9255e1b.Jpeg" />
+    <Content Include="ImagesData\Thumbnails\8f9a24c1-0701-47c5-a4c7-30ea363f62b7.Jpeg" />
+    <Content Include="ImagesData\Thumbnails\c2219db3-1bf4-46ff-8b9e-c29b9c4b691e.Jpeg" />
     <Content Include="Models\ImagesDBEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ImagesDBEntities.Context.cs</LastGenOutput>
@@ -224,9 +236,7 @@
     <Content Include="Views\Images\ImageForm.cshtml" />
     <Content Include="Views\Images\Edit.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ImagesData\Thumbnails\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
