@@ -1,0 +1,24 @@
+﻿@model IEnumerable<ImagesManager.Models.Image>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Répertoire d'images</h2>
+<div>@Helper.GlyphiconAction("Create", "glyphicon-plus", "Ajout d'image")</div>
+<hr />
+
+<div class="photoContainersGrid">
+    @foreach (var item in Model)
+    {
+        <div class="photoContainer">
+            @Helper.Image(item)
+        </div>
+    }
+</div>
+<br />
+<br />
+
+@section Scripts {
+@Scripts.Render("~/bundles/ratings")
+}

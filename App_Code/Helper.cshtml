@@ -1,0 +1,78 @@
+﻿@helper Image(ImagesManager.Models.Image image)
+{
+    var Url = new System.Web.Mvc.UrlHelper(HttpContext.Current.Request.RequestContext);
+    var imageUrl = Url.Content(image.GetUrl(true));
+    var detailActionUrl = Url.Action("Details/" + image.Id.ToString(), "Images");
+    int roundedRating= (int)Math.Round(image.Rating);
+    <div>
+        <div class="ellipsis">@image.Title</div>
+        <a href="@detailActionUrl" target="_blank">
+            <div class="photo"
+                 style="background: url(@imageUrl) no-repeat center center;
+                 background-size: cover;"
+                 title="@image.Description">
+            </div>
+            
+            <div style="margin-top:4px"class="rating" ratingId="Rating_@image.Id" value="@roundedRating.ToString()" readOnly="true" scale="1.5"></div>
+        </a>
+    </div>
+}
+
+@helper ImageBig(ImagesManager.Models.Image image)
+{
+    var Url = new System.Web.Mvc.UrlHelper(HttpContext.Current.Request.RequestContext);
+    var imageUrl = Url.Content(image.GetUrl(false));
+    <div>
+        <a href="@imageUrl" target="_blank">
+            <div class="photoBig"
+                 style="background: url(@imageUrl) no-repeat center center;
+                 background-size: cover;">
+            </div>
+        </a>
+    </div>
+}
+
+@helper ImageUploader(int id, string imageSrc, string controlId = "ImageControl", string waitingImage = "", string TooltipMessage = "", string ToolTipPlacement = "bottom")
+{
+    var Url = new System.Web.Mvc.UrlHelper(HttpContext.Current.Request.RequestContext);
+    imageSrc = Url.Content(imageSrc);
+    controlId = Url.Content(controlId);
+    waitingImage = Url.Content(waitingImage);
+    <div class='imageUploader' id='@id' controlId='@controlId' imageSrc='@imageSrc' waitingImage='@waitingImage'
+         data-toggle="tooltip"
+         data-placement="@ToolTipPlacement"
+         title="@TooltipMessage">
+    </div>
+}
+
+
+@helper GlyphiconAction(string Action, string glyphiconClass, string TooltipMessage, string ToolTipPlacement = "bottom")
+{
+    var Url = new System.Web.Mvc.UrlHelper(HttpContext.Current.Request.RequestContext);
+    <a href="@Url.Action(Action)" style="text-decoration:none">
+        <span class="glyphicon glyphiconStyle @glyphiconClass"
+              title="@TooltipMessage"
+              data-placement="@ToolTipPlacement">
+        </span>
+    </a>
+}
+
+@helper GlyphiconConfirmAction(string Action, string glyphiconClass, string TooltipMessage, string ToolTipPlacement = "bottom")
+{
+    //// http://bootboxjs.com/documentation.html#bb-confirm
+    var Url = new System.Web.Mvc.UrlHelper(HttpContext.Current.Request.RequestContext);
+    var root = Url.Action("/");
+    var action = root + Action;
+    <div onclick='bootbox.confirm("@TooltipMessage", function(result){ if (result) window.location = "@action"; })'>
+        <span class="glyphicon glyphiconStyle @glyphiconClass"
+              title="@TooltipMessage"
+              data-placement="@ToolTipPlacement">
+        </span>
+    </div>
+}
+
+@helper Rating(string id, double value, bool readOnly = false, double scale = 2)
+{
+    int roundedValue = (int)Math.Round(value);
+    <div class="rating" ratingId="@id" value="@roundedValue.ToString()" readOnly="@readOnly.ToString()" scale="@scale.ToString()"></div>
+}

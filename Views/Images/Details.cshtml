@@ -1,0 +1,22 @@
+﻿@model ImagesManager.Models.Image
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div >
+    <h2>@Model.Title</h2>
+    <div style="display:grid; grid-template-columns:30px 30px 30px">
+        @Helper.GlyphiconAction("Edit/" + Model.Id, "glyphicon-edit", "Modifier " + Model.Title)
+        @Helper.GlyphiconConfirmAction("Delete/" + Model.Id.ToString(), "glyphicon-remove-circle", "Effacer " + Model.Title + "...")
+        @Helper.GlyphiconAction("Index", "glyphicon-circle-arrow-left", "Retour à la liste")
+    </div>
+</div>
+<hr />
+@Helper.ImageBig(Model)
+<div>
+    @Model.Description
+</div>
+
+
+ 
