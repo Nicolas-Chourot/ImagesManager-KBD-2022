@@ -103,3 +103,7 @@ legend {
 .UploadedImage {
     width: 100%;
 }
+
+.star {
+    cursor:pointer;
+}

@@ -22,19 +22,20 @@
 
 function InstallRating() {
     $(".rating").each(function () {
-        createRating($(this)[0], $(this).attr("ratingId"), parseInt($(this).attr("value")), $(this).attr("locked") == "true", parseFloat($(this).attr("scale")));
+        createRating($(this), $(this).attr("ratingId"), parseInt($(this).attr("value")), $(this).attr("locked").toLowerCase() == "true", parseFloat($(this).attr("scale")));
     });
 
 }
-function createRating(container, ratingId, value, locked = false, scale = 2) {
+function createRating(container, ratingId, value, locked, scale = 2) {
     const svgns = "http://www.w3.org/2000/svg";
-    locked = ratingId == undefined;
+    if (!locked)
+        locked = ratingId == undefined;
     let maxvalue = 5;
     svg = document.createElementNS(svgns, "svg");
     svg.setAttribute("id", "svg-" + ratingId);
     svg.style["width"] = 70 * scale;
     svg.style["height"] = 12 * scale;
-    container.appendChild(svg);
+    container.append(svg);
     if (!locked) {
         var input = document.createElement("input");
         input.type = "number";
@@ -42,7 +43,7 @@ function createRating(container, ratingId, value, locked = false, scale = 2) {
         input.setAttribute("name", ratingId);
         input.setAttribute("value", value);
         input.style["display"] = "none";
-        container.appendChild(input);
+        container.append(input);
     }
     for (let i = 1; i <= maxvalue; i++) {
         addStar(svg, i, i <= value, scale, locked);

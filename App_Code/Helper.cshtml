@@ -1,19 +1,21 @@
 ﻿@helper Image(ImagesManager.Models.Image image)
 {
-    var Url = new System.Web.Mvc.UrlHelper(HttpContext.Current.Request.RequestContext);
-    var imageUrl = Url.Content(image.GetUrl(true));
-    var detailActionUrl = Url.Action("Details/" + image.Id.ToString(), "Images");
-    int roundedRating= (int)Math.Round(image.Rating);
+var Url = new System.Web.Mvc.UrlHelper(HttpContext.Current.Request.RequestContext);
+var imageUrl = Url.Content(image.GetUrl(true));
+var detailActionUrl = Url.Action("Details/" + image.Id.ToString(), "Images");
+int roundedRating= (int)Math.Round(image.Rating);
+int length = Math.Min(image.Description.Length, 36);
+string descriptionSample = image.Description.Substring(0, length) + "...";
     <div>
         <div class="ellipsis">@image.Title</div>
         <a href="@detailActionUrl">
             <div class="photo"
                  style="background: url(@imageUrl) no-repeat center center;
                  background-size: cover;"
-                 title="@image.Description">
+                 title="@descriptionSample">
             </div>
             
-            <div style="margin-top:4px"class="rating" ratingId="Rating_@image.Id" value="@roundedRating.ToString()" readOnly="true" scale="1.5"></div>
+            <div style="margin-top:4px" class="rating" ratingId="Rating_@image.Id" value="@roundedRating.ToString()" locked="True" scale="1.5"></div>
         </a>
     </div>
 }
@@ -74,5 +76,5 @@
 @helper Rating(string id, double value, bool readOnly = false, double scale = 2)
 {
     int roundedValue = (int)Math.Round(value);
-    <div class="rating" ratingId="@id" value="@roundedValue.ToString()" readOnly="@readOnly.ToString()" scale="@scale.ToString()"></div>
+    <div class="rating" ratingId="@id" value="@roundedValue.ToString()" locked="@readOnly.ToString()" scale="@scale.ToString()"></div>
 }

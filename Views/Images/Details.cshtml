@@ -4,7 +4,7 @@
     ViewBag.Title = "Details";
 }
 
-<div >
+<div>
     <h2>@Model.Title</h2>
     <div style="display:grid; grid-template-columns:30px 30px 30px">
         @Helper.GlyphiconAction("Edit/" + Model.Id, "glyphicon-edit", "Modifier " + Model.Title)
@@ -13,10 +13,12 @@
     </div>
 </div>
 <hr />
+@Helper.Rating(Model.Id.ToString(), Model.Rating, true, 3)
 @Helper.ImageBig(Model)
-<div>
+<div style="margin-top:8px; width:500px; text-align:justify">
     @Model.Description
 </div>
 
-
- 
+@section Scripts {
+    @Scripts.Render("~/bundles/ratings")
+}
