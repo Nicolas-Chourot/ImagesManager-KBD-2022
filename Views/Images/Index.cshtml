@@ -8,17 +8,21 @@
 <div>@Helper.GlyphiconAction("Create", "glyphicon-plus", "Ajout d'image")</div>
 <hr />
 
-<div class="photoContainersGrid">
-    @foreach (var item in Model)
-    {
-        <div class="photoContainer">
-            @Helper.Image(item)
-        </div>
-    }
+<div id="photosContainer" class="photosContainer">
+    <!-- Peridocally refreshed -->
+    @{ Html.RenderAction("GetImages", new { forceRefresh = true }); }
 </div>
 <br />
 <br />
 
 @section Scripts {
-@Scripts.Render("~/bundles/ratings")
+    @Scripts.Render("~/bundles/ratings")
+    @Scripts.Render("~/bundles/partialRefresh")
+
+    <script defer>
+        installPartialRefresh("@Url.Action("GetImages")", "photosContainer", 3 /*secondes*/, PostRefreshTasks);
+        function PostRefreshTasks() {
+            InstallRating();
+        }
+    </script>
 }

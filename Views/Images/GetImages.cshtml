@@ -1,0 +1,10 @@
+﻿@model IEnumerable<ImagesManager.Models.Image>
+
+<div class="photosContainerGrid">
+    @foreach (var item in Model)
+    {
+        <div class="photoContainer">
+            @Helper.Image(item)
+        </div>
+    }
+</div>

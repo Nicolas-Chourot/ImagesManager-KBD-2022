@@ -1,7 +1,5 @@
 ﻿$(document).ready(() => {
-    $(".rating").each(function () {
-        createRating($(this)[0], $(this).attr("ratingId"), parseInt($(this).attr("value")), $(this).attr("locked") == "true", parseFloat($(this).attr("scale")));
-    });
+    InstallRating();
 
     $(".star").mouseover(function () {
         if ($(this).attr("locked") == "true") return false;
@@ -22,7 +20,12 @@
     })
 });
 
+function InstallRating() {
+    $(".rating").each(function () {
+        createRating($(this)[0], $(this).attr("ratingId"), parseInt($(this).attr("value")), $(this).attr("locked") == "true", parseFloat($(this).attr("scale")));
+    });
 
+}
 function createRating(container, ratingId, value, locked = false, scale = 2) {
     const svgns = "http://www.w3.org/2000/svg";
     locked = ratingId == undefined;

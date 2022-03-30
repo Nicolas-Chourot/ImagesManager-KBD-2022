@@ -19,10 +19,45 @@ namespace ImagesManager.Controllers
             base.Dispose(disposing);
         }
 
+        public void RenewImagesSerialNumber()
+        {
+            HttpRuntime.Cache["imagesSerialNumber"] = Guid.NewGuid().ToString();
+        }
+
+        public string GetImagesSerialNumber()
+        {
+            if (HttpRuntime.Cache["imagesSerialNumber"] == null)
+            {
+                RenewImagesSerialNumber();
+            }
+            return (string)HttpRuntime.Cache["imagesSerialNumber"];
+        }
+
+        public void SetLocalImagesSerialNumber()
+        {
+            Session["imagesSerialNumber"] = GetImagesSerialNumber();
+        }
+
+        public bool IsImagesUpToDate()
+        {
+            return ((string)Session["imagesSerialNumber"] == (string)HttpRuntime.Cache["imagesSerialNumber"]);
+        }
+
         // GET: Images
         public ActionResult Index()
         {
-            return View(DB.Images.OrderByDescending(i => i.CreationDate));
+            SetLocalImagesSerialNumber();
+            return View();
+        }
+
+        public PartialViewResult GetImages(bool forceRefresh = false)
+        {
+            if (forceRefresh || !IsImagesUpToDate())
+            {
+                SetLocalImagesSerialNumber();
+                return PartialView(DB.Images.OrderByDescending(i => i.CreationDate));
+            }
+            return null;
         }
         public ActionResult Create()
         {
@@ -34,6 +69,7 @@ namespace ImagesManager.Controllers
             if (ModelState.IsValid)
             {
                 DB.Add_Image(image);
+                RenewImagesSerialNumber();
                 return RedirectToAction("Index");
             }
             return View(image);
@@ -51,6 +87,7 @@ namespace ImagesManager.Controllers
             if (ModelState.IsValid)
             {
                 DB.Update_Image(image);
+                RenewImagesSerialNumber();
                 return RedirectToAction("Index");
             }
             return View(image);
@@ -65,6 +102,7 @@ namespace ImagesManager.Controllers
         public ActionResult Delete(int id)
         {
             DB.Remove_Image(id);
+            RenewImagesSerialNumber();
             return RedirectToAction("Index");
         }
     }

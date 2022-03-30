@@ -18,6 +18,9 @@ namespace ImagesManager
             bundles.Add(new ScriptBundle("~/bundles/imageUploader").Include(
                         "~/Scripts/imageUploader.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/partialRefresh").Include(
+              "~/Scripts/partialRefresh.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/ratings").Include(
                         "~/Scripts/ratings.js"));
 
